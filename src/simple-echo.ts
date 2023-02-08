@@ -1,5 +1,5 @@
 export const echo = (message: any) => {
-  console.log(`Received ${message} by ${Date.toString()}`);
+  console.log(`Received ${message} at ${(new Date()).toString()}`);
   return message;
 };
 

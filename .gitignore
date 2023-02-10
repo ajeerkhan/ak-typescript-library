@@ -108,3 +108,4 @@ docs*
 
 package-lock*
 dist*
+src/**/*.js 

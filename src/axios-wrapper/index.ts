@@ -9,9 +9,6 @@ const request = {
         const response = await axios.get(url);
         return response;
     },
-    post: ()=>{
-
-    }
 };
 
 export default request;

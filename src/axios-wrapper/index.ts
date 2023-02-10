@@ -1,4 +1,6 @@
 import axios, { AxiosError, AxiosResponse , AxiosRequestConfig }  from 'axios';
+import { appendFile } from 'fs';
+import { ApiError } from '../lib/geocoding/model';
 
 
 /**
@@ -18,9 +20,16 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use(
     (res) => res,
     (error: AxiosError) => {
-      const { data, status, config } = error.response!;
-      console.error(`An error has been thrown with the respone as status code = ${status}, data = ${data}, config = ${config} `);
-      return Promise.reject(error);
+      if(error.response) {
+        const { data , status, config } = error.response!;
+        console.error(`The 7x Timezone API has been thrown an error with the details i.e. status = ${status}, data = ${data}, config = ${config} `);
+        return {data, status}; // considered as success case only.
+      }
+      else {
+        const { message , code, config } = error;
+        console.error(`The 7x Timezone API has been thrown an error with the details i.e. status code = ${code}, message = ${message}, config = ${config} `);
+        return Promise.reject(new ApiError(code, message));
+      }
     }
   );
 
@@ -31,14 +40,14 @@ axios.interceptors.response.use(
  */
 const request = {
     get: async <T> (url: string)=>{
-        const response = await axios.get<T>(url);
+        const response: AxiosResponse<T> = await axios.get<T>(url);
         return response;
     },
    /*  getv1: async <T, D> (): Promise<D> => {
         return <D> {}
     }, */
     post: async <T> (url: string, data = {})=>{
-        const response = await axios.post<T>(url, data);
+        const response: AxiosResponse<T> = await axios.post<T>(url, data);
         return response;
     },
 };

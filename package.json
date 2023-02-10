@@ -23,6 +23,7 @@
     "tsc": "tsc",
     "tsc-cjs": "tsc --p tsconfig-cjs.json",
     "fixup": "./fixup",
+    "build-local": "npm-run-all -s test clean tsc tsc-cjs fixup ",
     "build": "npm-run-all -s test clean tsc tsc-cjs fixup tag ",
     "prepare": "npm run safety-check && npm run build"
   },

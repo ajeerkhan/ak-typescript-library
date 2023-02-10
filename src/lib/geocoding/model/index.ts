@@ -1,12 +1,16 @@
 import Coordinates from "./coordinates";
 import Country from "./countryt";
 import Geocode from "./geocode";
-import Geocodes from "./geocodes";
+import GeocodeCollection from "./geocode-collection";
+import GeocodeResponse from "./geocode-response";
 import Location from "./location";
+import ApiError from "./error";
 export {
     Coordinates,
     Country,
     Geocode,
-    Geocodes,
+    GeocodeResponse,
+    GeocodeCollection,
     Location,
+    ApiError,
 };

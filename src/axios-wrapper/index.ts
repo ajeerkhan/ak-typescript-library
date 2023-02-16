@@ -7,7 +7,7 @@ import { ApiError } from '../lib/geocoding/model';
  * Request interceptor to handle request before calling the service.
  */
 axios.interceptors.request.use((config) => {
-    let token = undefined;
+    const token = undefined;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

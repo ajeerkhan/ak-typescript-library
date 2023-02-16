@@ -4,7 +4,8 @@ import { geoCodeBaseUrl, geoCodeApiUrl, apiKey } from '..//../configuration';
 
 const geocoding = {
     geocode: async (location: string): Promise<GeocodeCollection | ApiError | undefined>  => {
-        try {
+        /* eslint-disable-next-line no-useless-catch */
+        try { /* eslint-disable no-useless-catch */
             //invoke api & get the results
             const requestUrl = `${geoCodeBaseUrl}${geoCodeApiUrl}/geocode/${encodeURI(location)}?apikey=${apiKey}`;
             const geocodeResponse: unknown  = await request.get<GeocodeResponse>(requestUrl);

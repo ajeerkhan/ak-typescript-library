@@ -1,55 +1,65 @@
-import { Coordinates, Country, Geocode, GeocodeResponse, GeocodeCollection, Location, ApiError } from "./model";
+import { GeocodeResponse, ApiError, Options } from "./model";
 import { request } from '../../index';
 import { geoCodeBaseUrl, geoCodeApiUrl, apiKey } from '..//../configuration';
+import { AxiosResponse } from "axios";
 
 const geocoding = {
-    geocode: async (location: string): Promise<GeocodeCollection | ApiError | undefined>  => {
+    geocode: async (location: string, options?: Options): Promise<GeocodeResponse | ApiError | undefined>  => {
         /* eslint-disable-next-line no-useless-catch */
         try { /* eslint-disable no-useless-catch */
-            //invoke api & get the results
-            const requestUrl = `${geoCodeBaseUrl}${geoCodeApiUrl}/geocode/${encodeURI(location)}?apikey=${apiKey}`;
-            const geocodeResponse: unknown  = await request.get<GeocodeResponse>(requestUrl);
-            const res = <GeocodeResponse>geocodeResponse;
-            
-            if (res && res.status)
-                return res.data;
-
+            const config : Options = options || { baseUrl: geoCodeBaseUrl, apiUrl: geoCodeApiUrl, apiKey};
+            const requestUrl = `${config.baseUrl}${config.apiUrl}/geocode/${encodeURI(location)}?apikey=${config.apiKey}`;
+            const geocodeResponse: AxiosResponse<GeocodeResponse> = await request.get<GeocodeResponse>(requestUrl);
+            return geocodeResponse.data;
         } catch (error) {
-            throw error;
+            const apiError : ApiError = error as ApiError;
+            if(apiError.getData()?.data) {
+                apiError.setData(apiError.getData()?.data); //handling data property, override if data property available in the next level.
+            }
+
+            if(apiError.getData()) //handling message property, appears if no data property available.
+                delete apiError["message"];
+
+            throw apiError;
         }
-        return undefined;
     },
 
-    search: async (searchString: string): Promise<GeocodeCollection | ApiError | undefined> => {
+    search: async (searchString: string, options?: Options): Promise<GeocodeResponse | ApiError | undefined> => {
         try {
-            //invoke api & get the results
-            const requestUrl = `${geoCodeBaseUrl}${geoCodeApiUrl}/search/${encodeURI(searchString)}?apikey=${apiKey}`;
-            const geocodeResponse: unknown = await request.get<GeocodeResponse>(requestUrl);
-            const res = <GeocodeResponse>geocodeResponse;
-
-            if (res && res.status)
-                return res.data;
-
+            const config : Options = options || { baseUrl: geoCodeBaseUrl, apiUrl: geoCodeApiUrl, apiKey};
+            const requestUrl = `${config.baseUrl}${config.apiUrl}/search/${encodeURI(searchString)}?apikey=${config.apiKey}`;
+            const geocodeResponse: AxiosResponse<GeocodeResponse> = await request.get<GeocodeResponse>(requestUrl);
+            return geocodeResponse.data;
         } catch (error) {
-            throw error;
+            const apiError : ApiError = error as ApiError;
+            if(apiError.getData()?.data) {
+                apiError.setData(apiError.getData()?.data); //handling data property, override if data property available in the next level.
+            }
+
+            if(apiError.getData()) //handling message property, appears if no data property available.
+                delete apiError["message"];
+
+            throw apiError;
         }
-        return undefined;
     },
 
-    reverse: async (latitude: string, longitude: string): Promise<GeocodeCollection | ApiError | undefined> => {
+    reverse: async (latitude: string, longitude: string, options?: Options): Promise<GeocodeResponse | ApiError | undefined> => {
         try {
-            //invoke api & get the results
-            const requestUrl = `${geoCodeBaseUrl}${geoCodeApiUrl}/reverse/${encodeURI(latitude)},${encodeURI(longitude)}?apikey=${apiKey}`;
-            const geocodeResponse: unknown = await request.get<GeocodeResponse>(requestUrl);
-            const res = <GeocodeResponse>geocodeResponse;
-
-            if (res && res.status)
-                return res.data;
-
+            const config : Options = options || { baseUrl: geoCodeBaseUrl, apiUrl: geoCodeApiUrl, apiKey};
+            const requestUrl = `${config.baseUrl}${config.apiUrl}/reverse/${encodeURI(latitude)},${encodeURI(longitude)}?apikey=${config.apiKey}`;
+            const geocodeResponse: AxiosResponse<GeocodeResponse> = await request.get<GeocodeResponse>(requestUrl);
+            return geocodeResponse.data;
         } catch (error) {
-            throw error;
+            const apiError : ApiError = error as ApiError;
+            if(apiError.getData()?.data) {
+                apiError.setData(apiError.getData()?.data); //handling data property, override if data property available in the next level.
+            }
+
+            if(apiError.getData()) //handling message property, appears if no data property available.
+                delete apiError["message"];
+
+            throw apiError;
         }
-        return undefined;
     },
 };
 

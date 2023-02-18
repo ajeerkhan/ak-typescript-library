@@ -5,6 +5,7 @@ import GeocodeCollection from "./geocode-collection";
 import GeocodeResponse from "./geocode-response";
 import Location from "./location";
 import ApiError from "./error";
+import Options  from './options';
 export {
     Coordinates,
     Country,
@@ -13,4 +14,5 @@ export {
     GeocodeCollection,
     Location,
     ApiError,
+    Options,
 };

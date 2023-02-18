@@ -1,5 +1,4 @@
-import axios, { AxiosError, AxiosResponse , AxiosRequestConfig }  from 'axios';
-import { appendFile } from 'fs';
+import axios, { AxiosError, AxiosResponse }  from 'axios';
 import { ApiError } from '../lib/geocoding/model';
 
 
@@ -7,10 +6,10 @@ import { ApiError } from '../lib/geocoding/model';
  * Request interceptor to handle request before calling the service.
  */
 axios.interceptors.request.use((config) => {
-    const token = undefined;
+   /*  const token = undefined;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-    }
+    } */
     return config;
   });
 
@@ -18,18 +17,16 @@ axios.interceptors.request.use((config) => {
  * Response interceptor to handle the error.
  */
 axios.interceptors.response.use(
-    (res) => res,
+    res => res,
     (error: AxiosError) => {
-      if(error.response) {
-        const { data , status, config } = error.response!;
-        console.error(`The 7x Timezone API has been thrown an error with the details i.e. status = ${status}, data = ${data}, config = ${config} `);
-        return {data, status}; // considered as success case only.
+      console.error(`The 7x API has thrown an error with the details.`, error);
+      const { code, message } = error;
+      const apiError = new ApiError(code, message, -1000); //-1000 custom code
+      if(error?.response) {
+        apiError.setStatus(error?.response?.status);
+        apiError.setData(error?.response?.data);
       }
-      else {
-        const { message , code, config } = error;
-        console.error(`The 7x Timezone API has been thrown an error with the details i.e. status code = ${code}, message = ${message}, config = ${config} `);
-        return Promise.reject(new ApiError(code, message));
-      }
+      return Promise.reject(apiError);
     }
   );
 

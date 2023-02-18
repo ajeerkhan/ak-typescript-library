@@ -1,13 +1,13 @@
 import { GeocodeResponse, ApiError, Options } from "./model";
 import { request } from '../../index';
-import { geoCodeBaseUrl, geoCodeApiUrl, apiKey } from '..//../configuration';
+import { baseUrl, geoCodeApiUrl, apiKey } from '..//../configuration';
 import { AxiosResponse } from "axios";
 
 const geocoding = {
     geocode: async (location: string, options?: Options): Promise<GeocodeResponse | ApiError | undefined>  => {
         /* eslint-disable-next-line no-useless-catch */
         try { /* eslint-disable no-useless-catch */
-            const config : Options = options || { baseUrl: geoCodeBaseUrl, apiUrl: geoCodeApiUrl, apiKey};
+            const config : Options = options || { baseUrl, apiUrl: geoCodeApiUrl, apiKey};
             const requestUrl = `${config.baseUrl}${config.apiUrl}/geocode/${encodeURI(location)}?apikey=${config.apiKey}`;
             const geocodeResponse: AxiosResponse<GeocodeResponse> = await request.get<GeocodeResponse>(requestUrl);
             return geocodeResponse.data;
@@ -26,7 +26,7 @@ const geocoding = {
 
     search: async (searchString: string, options?: Options): Promise<GeocodeResponse | ApiError | undefined> => {
         try {
-            const config : Options = options || { baseUrl: geoCodeBaseUrl, apiUrl: geoCodeApiUrl, apiKey};
+            const config : Options = options || { baseUrl, apiUrl: geoCodeApiUrl, apiKey};
             const requestUrl = `${config.baseUrl}${config.apiUrl}/search/${encodeURI(searchString)}?apikey=${config.apiKey}`;
             const geocodeResponse: AxiosResponse<GeocodeResponse> = await request.get<GeocodeResponse>(requestUrl);
             return geocodeResponse.data;
@@ -45,7 +45,7 @@ const geocoding = {
 
     reverse: async (latitude: string, longitude: string, options?: Options): Promise<GeocodeResponse | ApiError | undefined> => {
         try {
-            const config : Options = options || { baseUrl: geoCodeBaseUrl, apiUrl: geoCodeApiUrl, apiKey};
+            const config : Options = options || { baseUrl, apiUrl: geoCodeApiUrl, apiKey};
             const requestUrl = `${config.baseUrl}${config.apiUrl}/reverse/${encodeURI(latitude)},${encodeURI(longitude)}?apikey=${config.apiKey}`;
             const geocodeResponse: AxiosResponse<GeocodeResponse> = await request.get<GeocodeResponse>(requestUrl);
             return geocodeResponse.data;

@@ -1,11 +1,16 @@
 const {
-GEOCODE_BASE_URL = "", 
+_7X_BASE_URL = "", 
+_7X_API_KEY = "xxxx",
+
 GEOCODE_API_URL = "",
-GEOCODE_API_KEY = "xxxx"
+TIMEZONE_API_URL = "",
+
 } = process.env;
 
 export {
-    GEOCODE_BASE_URL as geoCodeBaseUrl,
+    _7X_API_KEY as apiKey,
+    _7X_BASE_URL as baseUrl,
     GEOCODE_API_URL as geoCodeApiUrl,
-    GEOCODE_API_KEY as apiKey
+    TIMEZONE_API_URL as timeZoneApiUrl,
+
 };

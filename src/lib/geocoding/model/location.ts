@@ -1,4 +1,4 @@
-import Country from "./countryt";
+import Country from "./country";
 
 export default interface Location {
     name: string,

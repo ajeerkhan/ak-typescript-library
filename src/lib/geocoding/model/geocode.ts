@@ -1,4 +1,4 @@
-import  Coordinates from './coordinates';
+import  { Coordinates } from '../../../model';
 import Location from './location';
 
 export default interface Geocode {

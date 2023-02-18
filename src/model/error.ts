@@ -1,5 +1,3 @@
-import { stat } from "fs";
-
  export default class ApiError {
     private code : string | undefined;
     private message?: string | undefined;

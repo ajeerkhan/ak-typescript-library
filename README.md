@@ -32,8 +32,9 @@ try {
 The Api options is an optional parameter if it  is set as environment variable  as below.
 ```
 
-GEOCODE_BASE_URL = "", 
-GEOCODE_API_URL = "",
+_7X_API_KEY = "", 
+_7X_BASE_URL = "",
 GEOCODE_API_KEY = "xxxx"
+TIMEZONE_API_URL = "xxxx"
 
 ```

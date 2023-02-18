@@ -28,3 +28,12 @@ try {
   console.log('error', error);
 }
 ```
+# Environment 
+The Api options is an optional parameter if it  is set as environment variable  as below.
+```
+
+GEOCODE_BASE_URL = "", 
+GEOCODE_API_URL = "",
+GEOCODE_API_KEY = "xxxx"
+
+```

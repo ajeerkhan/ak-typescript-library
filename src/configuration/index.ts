@@ -1,2 +1,11 @@
-const { geoCodeBaseUrl = "https://api.7x.ax", geoCodeApiUrl = "/geocode/v1", apiKey = "44bed54b990108565360d420f7ec3d8a" } = process.env;
-export { geoCodeBaseUrl, geoCodeApiUrl, apiKey };
+const {
+GEOCODE_BASE_URL = "", 
+GEOCODE_API_URL = "",
+GEOCODE_API_KEY = "xxxx"
+} = process.env;
+
+export {
+    GEOCODE_BASE_URL as geoCodeBaseUrl,
+    GEOCODE_API_URL as geoCodeApiUrl,
+    GEOCODE_API_KEY as apiKey
+};

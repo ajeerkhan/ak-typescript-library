@@ -1,6 +1,6 @@
 {
   "name": "create-ak-typescript-library",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "SDK for integration with application api; it is going to publish a npm package both in es5, es6 support at the same time.",
   "type": "module",
   "main": "dist-cjs/index.js",
